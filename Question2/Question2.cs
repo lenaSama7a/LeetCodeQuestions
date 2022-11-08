@@ -6,38 +6,63 @@ class Question2
 {
     static long divide(long dividend, long divisor)
     {
-        int sign;
-        if ((dividend < 0) ^ (divisor < 0)) // ^ : XOR
-            sign = -1;
-        else
-            sign = 1;
-
-        dividend = Math.Abs(dividend);
-        divisor = Math.Abs(divisor);
-
-        long quotient = 0;
-
-        while (dividend >= divisor)
+        if (divisor == Int32.MinValue)
         {
-            dividend -= divisor;
-            ++quotient;
+            return dividend == Int32.MinValue ? 1 : 0;
         }
 
-        if (sign == -1)
-            quotient = -quotient;
+        if (dividend == Int32.MinValue)
+        {
+            if (divisor == 1)
+            {
+                return dividend;
+            }
+            else if (divisor == -1)
+            {
+                return Int32.MaxValue;
+            }
+        }
+        else if (dividend == Int32.MaxValue)
+        {
+            if (divisor == 1)
+            {
+                return dividend;
+            }
+            else if (divisor == -1)
+            {
+                return -dividend;
+            }
+        }
 
-        return quotient;
-    }
+        long dividendLong = dividend;
+        long divisorLong = divisor;
 
-    public static void Main()
-    {
+        bool sign = false;
+        if (dividendLong < 0 && divisorLong < 0)
+        {
+            dividendLong = -dividendLong;
+            divisorLong = -divisorLong;
+        }
+        else if (dividendLong < 0 && divisorLong > 0)
+        {
+            sign = true;
+            dividendLong = -dividendLong;
+        }
+        else if (dividendLong > 0 && divisorLong < 0)
+        {
+            sign = true;
+            divisorLong = -divisorLong;
+        }
 
-        long a = 10;
-        long b = 3;
-        Console.WriteLine(divide(a, b)); // 3
+        long ans = 0;
+        while (dividendLong >= divisorLong)
+        {
+            dividendLong -= divisorLong;
+            ans++;
+        }
 
-        a = -7;
-        b = 3;
-        Console.WriteLine(divide(a, b)); // -5
+        ans = sign ? -ans : ans;
+
+        return ans > Int32.MaxValue ? Int32.MaxValue : (int)ans;
     }
 }
