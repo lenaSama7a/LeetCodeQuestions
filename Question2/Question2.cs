@@ -4,12 +4,12 @@
 using System;
 class Question2
 {
-    static long divide(long dividend, long divisor)
+    static int divide(int dividend, int divisor)
     {
         if (divisor == Int32.MinValue)
         {
             return dividend == Int32.MinValue ? 1 : 0;
-        }
+        } 
 
         if (dividend == Int32.MinValue)
         {
