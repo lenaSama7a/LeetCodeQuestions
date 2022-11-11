@@ -2,6 +2,7 @@
 //Given two integers dividend and divisor, divide two integers without using multiplication, division, and mod operator.
 //https://leetcode.com/problems/divide-two-integers/description/
 using System;
+namespace test;
 class Question2
 {
     static int divide(int dividend, int divisor)
@@ -9,7 +10,7 @@ class Question2
         if (divisor == Int32.MinValue)
         {
             return dividend == Int32.MinValue ? 1 : 0;
-        } 
+        }
 
         if (dividend == Int32.MinValue)
         {
